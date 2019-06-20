@@ -32,6 +32,8 @@ class LoginActivity : AppCompatActivity() {
             this.loginInfo.observe(this@LoginActivity,Observer<LoginInfo>{
                            //改变了
                 Toast.makeText(application,"改变了"+it.toString(),0).show()
+                //通知databinding 状态改变
+                loginViewModel.notifyPropertyChanged(BR.loginInfo)
             })
 
         }
@@ -54,6 +56,12 @@ class LoginActivity : AppCompatActivity() {
           override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
           }
       })
+
+        loginBinding.logoinbtn.setOnClickListener {
+
+            loginViewModel.loginInfo.postValue(LoginInfo("帅比","1234567890",1))
+
+        }
 
     }
 
